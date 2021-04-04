@@ -1,10 +1,9 @@
 
 const express = require('express');
-const bodyParser = require('body-Parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config()
-const port = 5000;
 const uri = `mongodb+srv://${process.env.DV_USER}:${process.env.DV_PASS}@cluster0.5h4lz.mongodb.net/${process.env.DV_NAME}?retryWrites=true&w=majority`;
 
 
@@ -15,6 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+const port = 5000;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -64,13 +64,7 @@ client.connect(err => {
             res.send(result.insertedCount > 0)
         })
     })
-
-
-
 });
-
-
-
 
 
 app.listen(process.env.PORT || port)
